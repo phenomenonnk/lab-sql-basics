@@ -45,7 +45,7 @@ limit 5;
 
 -- Query 7
 -- What are the account_ids with the lowest loan amount that have a loan duration of 60 in the loan table?
-select account_id, amount, duration from bank.loan
+select account_id from bank.loan
 where duration=60
 order by amount asc
 -- if we need the 5 lowest loan amounts we can add here 'limit 5'
@@ -56,16 +56,18 @@ order by amount asc
 -- Note: There shouldn't be a table name order, since order is reserved from the ORDER BY clause. 
 -- You have to use backticks to escape the order table name.
 select distinct(k_symbol) from bank.order
+where k_symbol <> '' 
+-- where k_symbol is not null
 order by k_symbol asc;
 
 -- Query 9
 -- In the order table, what are the order_ids of the client with the account_id 34?
-select order_id,account_id from bank.order
+select order_id from bank.order
 where account_id=34;
 
 -- Query 10
 -- In the order table, which account_ids were responsible for orders between order_id 29540 and order_id 29560 (inclusive)?
-select account_id,order_id as example_of_order_id from bank.order
+select account_id from bank.order
 where 29540<=order_id and order_id<=29560
 group by account_id;
 
